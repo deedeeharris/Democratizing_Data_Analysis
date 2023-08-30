@@ -45,6 +45,13 @@ def upload_csv_or_excel():
             elif file_name.endswith('.xlsx') or file_name.endswith('.xls'):
                 df = pd.read_excel(file_name)
                 file_type = "Excel"
+            elif file_name.endswith('.zsav') or file_name.endswith('.sav'):
+                df = pd.read_spss(file_name)
+                file_type = "SPSS"
+                # Save the DataFrame with the same name as the original file
+                file_name = file_name.replace('.zsav', '.csv').replace('.sav', '.csv')
+                df.to_csv(file_name, index=False)
+                print(f"DataFrame from {file_type} saved as CSV:", file_name)
             else:
                 print(f"Unsupported file format for {file_name}. Only CSV and Excel files are supported.")
                 return
@@ -55,7 +62,7 @@ def upload_csv_or_excel():
             print("\n\n")
 
             prompt = f"""
-Act as a senior Python Data Analyst. You will be provided with a file path of a xlsx file or a csv file, and information regarding it.
+Act as a senior Python Data Analyst. You will be provided with a file path of a xlsx/xls file or a csv file, and information regarding it.
 Your task is to generate Python code according to the user's request, related to data analysis and visualization.
 You should return the entire code in one message. Please note that you should not return any additional explanations or markdown text,
 only the Python code with detailed comments. If the dataset contains Hebrew words, then from bidi.algorithm import get_display, and use it only when plotting seaborn figure titles, x and y ticks, etc.
