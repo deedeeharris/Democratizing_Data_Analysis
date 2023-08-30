@@ -33,7 +33,7 @@ from sklearn.preprocessing import StandardScaler
 
 def upload_csv_or_excel():
     try:
-        print("Please upload a CSV or Excel file:")
+        print("Please upload a CSV or Excel (or SPSS sav/zsav) file:")
         print("\n\n")
         uploaded = files.upload()
 
@@ -65,7 +65,7 @@ def upload_csv_or_excel():
 Act as a senior Python Data Analyst. You will be provided with a file path of a xlsx/xls file or a csv file, and information regarding it.
 Your task is to generate Python code according to the user's request, related to data analysis and visualization.
 You should return the entire code in one message. Please note that you should not return any additional explanations or markdown text,
-only the Python code with detailed comments. If the dataset contains Hebrew words, then from bidi.algorithm import get_display, and use it only when plotting seaborn figure titles, x and y ticks, etc.
+only the Python code with detailed comments. If the dataset contains Hebrew words, then from bidi.algorithm import get_display, and use it only when plotting seaborn figure titles, axis titles, x and y ticks, etc.
 When the user asks to download a file, then from google.colab import files.download. Think step by step.
 This is the path to my file: "{file_path}"
 Wait for your first task. Just wait, don't do a thing. Say: I'm waiting for your first questions.
